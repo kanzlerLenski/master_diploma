@@ -1,0 +1,39 @@
+# extraction
+# books - https://www.kodges.ru/hudlit/klassik/177621-biblioteka-russkoj-klassicheskoj-literatury-3719.html
+# classics valid - https://royallib.com/book/lermontov_mihail/vadim.html
+# corpus valid - https://tatoeba.org/eng/downloads
+
+import zipfile
+
+path = os.walk()
+
+for root, subdirs, files in path:
+	for file in files:
+		if file.endswith(".zip"):
+			filePath = os.path.join(root, file)
+			with zipfile.ZipFile(filePath, 'r') as zip_ref:
+				zip_ref.extractall(root)
+				
+# deletion
+
+for root, subdirs, files in path:
+	for file in files:
+		if file.endswith(".zip"):
+			filePath = os.path.join(root, file)
+			os.remove(filePath)
+			
+# moving
+
+import shutil
+
+direction = r"C:\Users\Eugene\PycharmProjects\tales_generator\improvement_series\classics"
+
+for root, dirs, files in path:
+	for file in files:
+		try:
+			shutil.move(os.path.join(root, file), direction)
+		except OSError:
+			pass
+			
+# возврат формы
+form = morph.parse(token)[0].inflect({f"{tag[0]}", f"{tag[1]}"}).word
